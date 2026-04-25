@@ -6,9 +6,10 @@ export interface ITarea {
     fechaFin: Date;
     organizacionId: Types.ObjectId | string;
     usuarios: Types.ObjectId[] | string[];
+    status: 'to-do' | 'in progress' | 'done';
 }
 
-export interface ITareaModel extends ITarea, Document {}
+export interface ITareaModel extends ITarea, Document { }
 
 const TareaSchema: Schema = new Schema(
     {
@@ -16,7 +17,8 @@ const TareaSchema: Schema = new Schema(
         fechaInicio: { type: Date, required: true },
         fechaFin: { type: Date, required: true },
         organizacionId: { type: Schema.Types.ObjectId, required: true, ref: 'Organizacion' },
-        usuarios: [{ type: Schema.Types.ObjectId, ref: 'Usuario' }]
+        usuarios: [{ type: Schema.Types.ObjectId, ref: 'Usuario' }],
+        status: { type: String, enum: ['to-do', 'in progress', 'done'], required: true, default: 'to-do' },
     },
     {
         versionKey: false
