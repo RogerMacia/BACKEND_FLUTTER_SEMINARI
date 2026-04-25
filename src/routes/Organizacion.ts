@@ -275,4 +275,6 @@ router.put('/:organizacionId', ValidateJoi(Schemas.organizacion.update), control
  */
 router.delete('/:organizacionId', controller.deleteOrganizacion);
 
+router.put('/task/:taskId', tareaController.updateTask);
+
 export default router;

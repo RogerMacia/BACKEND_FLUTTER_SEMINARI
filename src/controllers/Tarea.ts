@@ -19,4 +19,13 @@ const readByOrganizacion = async (req: Request, res: Response, next: NextFunctio
     }
 };
 
-export default { createByOrganizacion, readByOrganizacion };
+const updateTask = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const task = await TareaService.updateTask(req.params.taskId, req.body);
+        return task ? res.status(200).json(task) : res.status(404).json("Not found");
+    } catch (error) {
+        return res.status(500).json({ error });
+    }
+}
+
+export default { createByOrganizacion, readByOrganizacion, updateTask };

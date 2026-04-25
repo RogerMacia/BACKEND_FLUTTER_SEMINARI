@@ -42,4 +42,10 @@ const getTareasByOrganizacion = async (organizacionId: string): Promise<ITareaMo
     return await Tarea.find({ organizacionId }).populate({ path: 'usuarios', select: 'name' });
 };
 
-export default { createTareaByOrganizacion, getTareasByOrganizacion };
+const updateTask = async (taskId: string, data: ITareaModel): Promise<ITareaModel | null> => {
+    if (!mongoose.Types.ObjectId.isValid(taskId)) return null;
+
+    return await Tarea.findByIdAndUpdate(taskId, data).lean();
+}
+
+export default { createTareaByOrganizacion, getTareasByOrganizacion, updateTask };
